@@ -34,10 +34,13 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Debug list files
+        run: ls -R
+
       # ⑤ 复制 config
       - name: Copy custom .config
         run: |
-          cp default.config openwrt/.config
+          cp ./default.config ./openwrt/.config
 
       # ⑥ 编译（同样要进入 openwrt 目录）
       - name: Compile
