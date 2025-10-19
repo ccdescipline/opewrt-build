@@ -17,25 +17,24 @@ jobs:
       - name: Clone OpenWRT source
         run: git clone --depth=1 https://github.com/openwrt/openwrt.git
 
-    #   # ③ 安装依赖
-    #   - name: Install build dependencies
-    #     run: |
-    #         sudo apt-get update
-    #         sudo apt-get install -y \
-    #         ack antlr3 asciidoc bash bc binutils bzip2 cmake coreutils diffstat \
-    #         file findutils flex gawk gcc-multilib g++-multilib gettext git \
-    #         libncurses5-dev libssl-dev make patch perl-modules python3 python3-setuptools \
-    #         rsync unzip wget zlib1g-dev swig
+      # ③ 安装依赖
+      - name: Install build dependencies
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y \
+            ack antlr3 asciidoc bash bc binutils bzip2 cmake coreutils diffstat \
+            file findutils flex gawk gcc-multilib g++-multilib gettext git \
+            libncurses5-dev libssl-dev make patch perl-modules python3 python3-setuptools \
+            rsync unzip wget zlib1g-dev swig
 
-    #   # ④ 更新 feed（进入 openwrt 目录）
-    #   - name: Update feeds & install
-    #     working-directory: ./openwrt
-    #     run: |
-    #       ./scripts/feeds update -a
-    #       ./scripts/feeds install -a
+      # ④ 更新 feed（进入 openwrt 目录）
+      - name: Update feeds & install
+        working-directory: ./openwrt
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
 
-    #   - name: Debug list files
-    #     run: ls -R
+
 
       # ⑤ 复制 config
       - name: Copy custom .config
@@ -43,17 +42,17 @@ jobs:
         run: |
           cp ../default.config .config
 
-    #   # ⑥ 编译（同样要进入 openwrt 目录）
-    #   - name: Compile
-    #     run: |
-    #       cd openwrt
-    #       make defconfig
-    #       make download -j"$(nproc)" || make download -j1 V=s
-    #       make -j"$(nproc)" || make -j1 V=s
+      # ⑥ 编译（同样要进入 openwrt 目录）
+      - name: Compile
+        run: |
+          cd openwrt
+          make defconfig
+          make download -j"$(nproc)" || make download -j1 V=s
+          make -j"$(nproc)" || make -j1 V=s
 
-    #   # ⑦ 上传产物（要包含 openwrt 路径）
-    #   - name: Archive output
-    #     uses: actions/upload-artifact@v4
-    #     with:
-    #       name: openwrt-x86-build
-    #       path: openwrt/bin/targets/x86/64/*.img.gz
+      # ⑦ 上传产物（要包含 openwrt 路径）
+      - name: Archive output
+        uses: actions/upload-artifact@v4
+        with:
+          name: openwrt-x86-build
+          path: openwrt/bin/targets/x86/64/*.img.gz
