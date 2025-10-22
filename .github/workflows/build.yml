@@ -59,9 +59,9 @@ jobs:
       #       sed -i 's/download-ci-llvm *= *true/download-ci-llvm = "if-unchanged"/' {} +
         
 
-      - name: Install luci-app-openclash (Bypass only)
-        working-directory: ./openwrt
-        run: bash ../openclash.sh
+      # - name: Install luci-app-openclash (Bypass only)
+      #   working-directory: ./openwrt
+      #   run: bash ../openclash.sh
 
       # 复制 config
       - name: Copy custom .config
