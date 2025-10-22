@@ -75,7 +75,7 @@ jobs:
           cd openwrt
           make defconfig
           make download -j"$(nproc)" || make download -j1 V=s
-          make -j"$(nproc)" || make -j1 V=s
+          make -j1 V=s
 
       # 上传产物（要包含 openwrt 路径）
       - name: Archive output
