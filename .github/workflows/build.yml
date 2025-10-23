@@ -15,7 +15,7 @@ jobs:
 
       - name: Clone OpenWrt source (v24.10.4)
         run: |
-          git clone --branch v24.10.4 --depth=1 https://github.com/openwrt/openwrt.git
+          git clone -b openwrt-24.10 --depth=1 https://github.com/openwrt/openwrt.git
 
       # 安装依赖
       - name: Install build dependencies
